@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Eventos e Seletores JS</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <h1>Eventos com Funções JavaScript</h1>
+
+  <!-- Por ID -->
+  <button id="botaoClique" onclick="clicarBotao()">Clique aqui</button>
+
+  <!-- Por Classe -->
+  <div class="caixa" onmouseover="mouseSobre()" onmouseout="mouseFora()">Passe o mouse aqui</div>
+
+  <!-- Por Nome -->
+  <form name="formulario" onsubmit="enviarFormulario(event)">
+    <input type="text" name="campoTexto" placeholder="Digite algo..." />
+    <button type="submit">Enviar</button>
+  </form>
+
+  <!-- Por Marca -->
+  <p onclick="clicarParagrafo()">Clique neste parágrafo</p>
+
+  <!-- Por seletor (data attribute) -->
+   <div> 
+         <span id="clicarSpan" onclick="clicarSpan()">Clique neste span</span>
+    </div>
+  <script>
+        // Por ID
+        function clicarBotao() {
+        var botao = document.getElementById("botaoClique");
+        botao.textContent = "Botão clicado!";
+        alert("Você clicou no botão!");
+        }
+
+        // Por classe
+        function mouseSobre() {
+        var caixa = document.querySelector(".caixa");
+        caixa.textContent = "Mouse em cima!";
+        caixa.style.backgroundColor = "#a29bfe";
+        }
+
+        function mouseFora() {
+        var caixa = document.querySelector(".caixa");
+        caixa.textContent = "Passe o mouse aqui";
+        caixa.style.backgroundColor = "#e0e0e0";
+        }
+
+        // Por nome
+        function enviarFormulario(event) {
+        event.preventDefault();
+        var campo = document.forms["formulario"]["campoTexto"].value;
+        alert("Você digitou: " + campo);
+        }
+
+        // Por marca (primeiro <p>)
+        function clicarParagrafo() {
+        var paragrafo = document.getElementsByTagName("p")[0];
+        paragrafo.textContent = "Parágrafo clicado!";
+        }
+
+        // Por seletor personalizado (data attribute)
+        function clicarSpan() {
+            var span = document.querySelector("#clicarSpan");
+            span.textContent = "Você clicou no span!";
+            span.style.backgroundColor = "#fab1a0";
+        }
+  </script>
+</body>
+</html>
