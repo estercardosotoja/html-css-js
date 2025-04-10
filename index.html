@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Eventos e Seletores JS</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <h1>Eventos DOM JS com AddEventList</h1>
+
+  <!-- Por ID -->
+  <button id="botaoClique">Clique aqui</button>
+
+  <!-- Por Classe -->
+  <div class="caixa">Passe o mouse aqui</div>
+
+  <!-- Por Nome -->
+  <form name="formulario">
+    <input type="text" name="campoTexto" placeholder="Digite algo..." />
+    <button type="submit">Enviar</button>
+  </form>
+
+  <!-- Por Marca -->
+  <p>Clique neste parágrafo</p>
+
+  <!-- Por seletor (data attribute) -->
+  <div> 
+    <span id="clicarSpan" onclick="clicarSpan()">Clique neste span</span>
+  </div>
+
+  <script>
+    // Por ID
+    const botao = document.getElementById("botaoClique");
+    botao.addEventListener("click", function () {
+      botao.textContent = "Botão clicado!";
+      alert("Você clicou no botão!");
+    });
+
+    // Por classe
+    const caixa = document.querySelector(".caixa");
+    caixa.addEventListener("mouseover", function () {
+      caixa.textContent = "Mouse em cima!";
+      caixa.style.backgroundColor = "#a29bfe";
+    });
+    caixa.addEventListener("mouseout", function () {
+      caixa.textContent = "Passe o mouse aqui";
+      caixa.style.backgroundColor = "#e0e0e0";
+    });
+
+    // Por nome
+    const formulario = document.forms["formulario"];
+    formulario.addEventListener("submit", function (event) {
+      event.preventDefault();
+      const campo = formulario["campoTexto"].value;
+      alert("Você digitou: " + campo);
+    });
+
+    // Por marca (primeiro <p>)
+    var paragrafo = document.getElementsByTagName("p")[0];
+    paragrafo.addEventListener("click", function () {
+      paragrafo.textContent = "Parágrafo clicado!";
+    });
+
+    // Por seletor personalizado (data attribute)
+    var span = document.querySelector("#clicarSpan");
+    span.addEventListener("click", function () {
+      span.textContent = "Você clicou no span!";
+      span.style.backgroundColor = "#fab1a0";
+    });
+
+  </script>
+</body>
+</html>
