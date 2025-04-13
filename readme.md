@@ -17,10 +17,17 @@ Navegue pelas Branchs e cada uma será uma aula.
     - Formatação e Conversão de Number
     - Exemplo 
 
-- [ ] AULA04 - Condicionais e Repetições 
+- [x] AULA04 - Condicionais e Repetições 
     - Condições Simples - IF
     - Condições Composta - IF ... ELSE
     - Condições Alinhada - IF ... ELSEIF .. ELSE
     - Condições Múltiplas - SWITCH .. CASE
     - Repetição while
+
+- [x] AULA05 - Funções 
+    - Funções com Parametros 
+    - Funções sem Parametros
+    - Funções dentro de variavéis
+
+
 
