@@ -15,8 +15,14 @@ let frutas = [ "maça", "banana", "mamão", "abacate"]
 frutas.sort()   // Ordena as palavras em ordem alfabetica; 
 console.log(frutas)
 
-
-// Percorrendo o Array com for 
+console.log("Percorrer array com for genérico")
+// Percorrendo o Array com for genérico
 for(let i=0; i < frutas.length; i++){
-    console.log(`Posição: ${i} : ${frutas[i]}`)
+    console.log(`Frutas: ${i} : ${frutas[i]}`)
+}
+
+console.log("Percorrer array com for especifico")
+// Percorrendo o Array com for array
+for (let [indice, fruta] of frutas.entries()) {
+  console.log(`Frutas: ${indice} : ${fruta}`);
 }
