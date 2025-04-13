@@ -15,6 +15,5 @@ Navegue pelas Branchs e cada uma será uma aula.
     - Ternário
     - Formatação e Conversão de String
     - Formatação e Conversão de Number
+    - Tipo de Declaração de Variavél
     - Exemplo 
-
-- [ ] AULA04 - Condicionais e Repetições 
