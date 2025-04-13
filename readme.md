@@ -18,3 +18,9 @@ Navegue pelas Branchs e cada uma será uma aula.
     - Exemplo 
 
 - [ ] AULA04 - Condicionais e Repetições 
+    - Condições Simples - IF
+    - Condições Composta - IF ... ELSE
+    - Condições Alinhada - IF ... ELSEIF .. ELSE
+    - Condições Múltiplas - SWITCH .. CASE
+    - Repetição while
+
