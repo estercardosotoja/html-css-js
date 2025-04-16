@@ -1,6 +1,6 @@
 # Aulas de JS
 
-Navegue pelas Branchs e cada uma será uma aula.
+Navegue pelas Branchs e para acessar o tema das aulas:
 
 - [x] AULA01 - Seletores e Eventos de JS.
 
@@ -28,6 +28,3 @@ Navegue pelas Branchs e cada uma será uma aula.
     - Funções com Parametros 
     - Funções sem Parametros
     - Funções dentro de variavéis
-
-
-
