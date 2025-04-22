@@ -1,6 +1,6 @@
 # Aulas de JS
 
-Navegue pelas Branchs e cada uma será uma aula.
+Navegue pelas Branchs e para acessar o tema das aulas:
 
 - [x] AULA01 - Seletores e Eventos de JS.
 
@@ -29,5 +29,13 @@ Navegue pelas Branchs e cada uma será uma aula.
     - Funções sem Parametros
     - Funções dentro de variavéis
 
+- [x] AULA06 - CRUD Banco de Dados
 
 
+### Correção de Exercicios: 
+
+- [x] exercicios-aula03
+    - 4 Exercicios
+- [x] exercicios-aula04
+    - 1 Exercicio 
+    
