@@ -1,39 +1,55 @@
-// Array com 10 números
+/* 
+    Comparação de Números
+
+    Crie um array com 10 valores e exiba: 
+    Se há valores iguais;
+    Qual é o maior;
+    Qual é o menor;
+    Quais são os valores pares e ímpares; 
+    Use operadores relacionais, aritméticos e módulo %.
+*/
+
+// USANDO OBJETO
+
 const valores = [5, 12, 8, 12, 7, 9, 3, 5, 20, 1];
 
-// Arrays para armazenar os resultados
-const repetidos = [];
-const pares = [];
-const impares = [];
+const repetidos = []; 
+const pares = [];     
+const impares = [];   
 
-// Assume-se inicialmente que o primeiro número é o maior e o menor
 let maior = valores[0];
 let menor = valores[0];
+let contagem = {};
 
-// Verifica maior, menor, par/ímpar
 for (let valor of valores) {
-    if (valor > maior) {
+
+    //maiores
+    if (valor > maior){
         maior = valor;
     }
 
+    //menores
     if (valor < menor) {
         menor = valor;
     }
 
+    //impares e pares
     (valor % 2 === 0) ? pares.push(valor) : impares.push(valor);
+
+    if (contagem[valor] === undefined) {
+        contagem[valor] = 1;
+    } else {
+        contagem[valor] += 1;
+    }
 }
 
-
-    for (let i = 0; i < valores.length; i++) {
-        for (let j = i + 1; j < valores.length; j++) {
-            if (valores[i] === valores[j]) {
-                repetidos.push(valores[i]);
-                break; 
-            }
-        }
+for (let numero in contagem) {
+    if (contagem[numero] > 1) {
+        repetidos.push(Number(numero));
     }
+}
 
-// Exibe os resultados
+// Exibe os resultados no console
 console.log("Array original:", valores);
 console.log("Valores repetidos:", repetidos);
 console.log("Maior valor:", maior);
