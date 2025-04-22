@@ -1,0 +1,31 @@
+
+body {
+    background-color: #f8f8f8;
+}/* 1.Faltavam as chaves {} no seletor 'body' e o ponto e vírgula após a propriedade */
+
+h1 {
+    color: orange; /* 2.'laranja' não é uma cor válida em CSS — deve-se usar o nome em inglês 'orange' ou um código hexadecimal. */
+    text-align: center; /* 3.'centro' não é um valor válido — o correto é 'center'. */
+}
+
+p {
+    font-size: 18px; /* 4.Faltava ponto e vírgula após font-size. */
+    font-weight: bold;
+}
+
+button {
+    background-color: #008CBA;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer; /* 5.'clique' não é um valor válido para 'cursor' — o correto é 'pointer'. */
+}
+
+.produto img {
+    width: 200px; /* 6. 'widht' está escrito errado — o correto é 'width'. */
+    height: 200px;
+} 
+
+footer {
+    font-size: 14px; /* 7. A propriedade 'font-size' está vazia — precisa de um valor válido como '14px'. */
+    text-align: center;
+}
