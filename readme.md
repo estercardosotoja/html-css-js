@@ -28,3 +28,10 @@ Navegue pelas Branchs e para acessar o tema das aulas:
     - Funções com Parametros 
     - Funções sem Parametros
     - Funções dentro de variavéis
+
+- [x] AULA06 - CRUD Firebase
+    - Salvando dados de funcionario no banco; 
+    - Listando dados de funcionario do banco;
+    - Excluindo dados de funcionario do banco;
+    - Editando dados de funcionario do banco; 
+    
