@@ -37,12 +37,27 @@
 
     <button type="submit" id="btnEnviar"> Enviar</button>
 
-    <button type="button" id="btnTeste"> Teste</button>
-
     <h2> Listar Funcionários </h2>
 
     <div id="listar-funcionarios">
         <p> Carregando lista de Funcionários... </p>
+    </div>
+
+    <div id="formulario-edicao" style="display: none;">
+        <h2>Editar Funcionário</h2>
+        <label for="editar-nome">Nome:</label>
+        <input type="text" id="editar-nome"><br><br>
+    
+        <label for="editar-idade">Idade:</label>
+        <input type="number" id="editar-idade"><br><br>
+    
+        <label for="editar-cargo">Cargo:</label>
+        <input type="text" id="editar-cargo"><br><br>
+    
+        <input type="hidden" id="editar-id">
+    
+        <button id="btn-salvar-edicao">Salvar Alterações</button>
+        <button id="btn-cancelar-edicao">Cancelar</button>
     </div>
 
     <script type="module" src="js/script.js"></script>

@@ -1,5 +1,5 @@
 import { db } from './firebaseConfig.js';
-import { collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+import { collection, addDoc, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
 
 
 // SALVANDO DADOS NO BANCO 
@@ -47,10 +47,6 @@ document.getElementById("btnEnviar").addEventListener('click', async function(){
 });
 
 // CONSULTAR (LISTAR) OS DADOS DO BANCO
-document.addEventListener("DOMContentLoaded", teste);
-function teste(){
-    document.getElementById("btnTeste").addEventListener('click', carregarListaDeFuncionarios);
-}
 
 async function buscarFuncionarios() {
     const dadosBanco = await getDocs(collection(db, "funcionarios"));
@@ -90,8 +86,47 @@ function renderizarListaDeFuncionarios(funcionarios){
             <strong> Nome: </strong> ${funcionario.nome} <br>
             <strong> Idade: </strong> ${funcionario.idade} <br>
             <strong> Cargo: </strong> ${funcionario.cargo} <br>
+            <button class="btn-Excluir" data-id="${funcionario.id}"> Excluir </button> 
             <hr>
         `
         listaFuncionariosDiv.appendChild(funcionarioDiv);
     }
 }
+
+document.addEventListener("DOMContentLoaded", carregarListaDeFuncionarios);
+
+// EXCLUIR DADOS DO BANCO DE DADOS
+
+async function excluirFuncionario(idFuncionario) {
+    try{
+        const documentoDeletar = doc(db, "funcionarios", idFuncionario);
+        await deleteDoc(documentoDeletar);
+        console.log("Funcionario com ID" + idFuncionario + "foi excluído.");
+        return true;
+    }catch (erro){
+        console.log("Erro ao excluir o funcionario", erro);
+        alert("Ocorreu um erro ao excluir funcionario. Tente novamente");
+        return false;
+    }
+}
+
+async function lidarClique(eventoDeClique) {
+    const btnExcluir = eventoDeClique.target.closest('.btn-Excluir');
+    const certeza = confirm("Tem certeza que deseja fazer essa exclusão?")
+    if(certeza){
+        if (btnExcluir){
+            const idFuncionario = btnExcluir.dataset.id;
+            const exclusaoBemSucedida = await excluirFuncionario(idFuncionario);
+    
+            if(exclusaoBemSucedida){
+                carregarListaDeFuncionarios();
+                alert('Funcionário excluído com sucesso!');
+            }
+        }
+    }else {
+        alert("Exclusão cancelada");
+    }
+    return
+}
+
+listaFuncionariosDiv.addEventListener("click", lidarClique)
