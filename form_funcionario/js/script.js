@@ -1,5 +1,5 @@
 import { db } from './firebaseConfig.js';
-import { collection, addDoc, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+import { collection, addDoc, getDocs, deleteDoc, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
 
 
 // SALVANDO DADOS NO BANCO 
@@ -87,6 +87,7 @@ function renderizarListaDeFuncionarios(funcionarios){
             <strong> Idade: </strong> ${funcionario.idade} <br>
             <strong> Cargo: </strong> ${funcionario.cargo} <br>
             <button class="btn-Excluir" data-id="${funcionario.id}"> Excluir </button> 
+            <button class="btn-Editar" data-id="${funcionario.id}"> Editar </button>
             <hr>
         `
         listaFuncionariosDiv.appendChild(funcionarioDiv);
@@ -112,21 +113,112 @@ async function excluirFuncionario(idFuncionario) {
 
 async function lidarClique(eventoDeClique) {
     const btnExcluir = eventoDeClique.target.closest('.btn-Excluir');
-    const certeza = confirm("Tem certeza que deseja fazer essa exclusão?")
-    if(certeza){
-        if (btnExcluir){
-            const idFuncionario = btnExcluir.dataset.id;
-            const exclusaoBemSucedida = await excluirFuncionario(idFuncionario);
     
-            if(exclusaoBemSucedida){
-                carregarListaDeFuncionarios();
-                alert('Funcionário excluído com sucesso!');
+    if(btnExcluir){
+        const certeza = confirm("Tem certeza que deseja fazer essa exclusão?")
+        if(certeza){
+            if (btnExcluir){
+                const idFuncionario = btnExcluir.dataset.id;
+                const exclusaoBemSucedida = await excluirFuncionario(idFuncionario);
+        
+                if(exclusaoBemSucedida){
+                    carregarListaDeFuncionarios();
+                    alert('Funcionário excluído com sucesso!');
+                }
             }
+        }else {
+            alert("Exclusão cancelada");
         }
-    }else {
-        alert("Exclusão cancelada");
     }
-    return
+
+    const btnEditar = eventoDeClique.target.closest(".btn-Editar");
+    
+    if (btnEditar){
+        const idFuncionario = btnEditar.dataset.id; 
+        const funcionario = await buscarFuncionario(idFuncionario);
+        
+        if (!funcionario){
+            alert("Funcionário não encontrado.");
+            return;
+        }
+        
+        const edicao = getValoresEditar(); 
+        
+        edicao.editarNome.value = funcionario.nome;
+        edicao.editarIdade.value = funcionario.idade;
+        edicao.editarCargo.value = funcionario.cargo;
+        edicao.editarId.value = funcionario.id;
+
+        edicao.formularioEdicao.style.display = 'block'
+
+    }
 }
 
-listaFuncionariosDiv.addEventListener("click", lidarClique)
+function getValoresEditar(){
+    return {
+        editarNome: document.getElementById("editar-nome"),
+        editarIdade: document.getElementById("editar-idade"),
+        editarCargo: document.getElementById("editar-cargo"),
+        editarId: document.getElementById("editar-id"),
+        formularioEdicao: document.getElementById("formulario-edicao")
+    }
+}
+
+let listarFucionarioDiv; 
+
+document.addEventListener("DOMContentLoaded", function(){
+    listarFucionarioDiv = document.getElementById("listar-funcionarios");
+    listarFucionarioDiv.addEventListener("click", lidarClique);
+    carregarListaDeFuncionarios();
+});
+
+async function buscarFuncionario(id) {
+    try{
+        const funcionarioDoc = doc(db, "funcionarios", id);
+        const dadosBanco = await getDoc(funcionarioDoc);
+        
+        if(dadosBanco.exists()){
+            return {id:dadosBanco.id, ...dadosBanco.data() };
+        }else{
+            console.log("Funcionario não encontrado com ID: " + id);
+            return null; 
+        }
+    }catch (erro){
+        console.log("Erro ao buscar funcionario ID: ", erro);
+        alert("Erro ao buscar o funcionario para edição!");
+        return null; 
+    }
+}
+
+document.getElementById('btn-salvar-edicao').addEventListener('click', async function () {
+    const edicao = getValoresEditar();
+
+    const id = edicao.editarId.value;
+    const novosDados = {
+        nome: edicao.editarNome.value.trim(),
+        idade: parseInt(edicao.editarIdade.value),
+        cargo: edicao.editarCargo.value.trim()
+    };
+
+    try{
+        const ref = doc(db, "funcionarios", id);
+        await setDoc(ref, novosDados);
+        alert("Funcionario atualizado com sucesso!");
+        edicao.formularioEdicao.style.display = 'none';
+        carregarListaDeFuncionarios();
+    }catch(erro){
+        console.log("Erro ao salvar edição: ", erro);
+        alert("Erro ao atualizar funcionario.");
+    }
+});
+
+// Botão de Cancelar Edição 
+document.getElementById("btn-cancelar-edicao").addEventListener('click', function(){
+    document.getElementById("formulario-edicao").style.display="none";
+})
+
+function adicionarListenersDeAcao() {
+    listaFuncionariosDiv.addEventListener('click', lidarClique);
+}
+
+document.addEventListener("DOMContentLoaded", carregarListaDeFuncionarios); 
